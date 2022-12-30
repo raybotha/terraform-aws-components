@@ -41,6 +41,7 @@ module "assume_role" {
   for_each = local.roles_config
   source   = "../account-map/modules/team-assume-role-policy"
 
+  global_tenant_name      = var.root_account_tenant_name
   allowed_roles           = { (local.identity_account_account_name) = each.value.trusted_teams }
   denied_roles            = { (local.identity_account_account_name) = each.value.denied_teams }
   allowed_principal_arns  = each.value.trusted_role_arns

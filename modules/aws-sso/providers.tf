@@ -15,9 +15,10 @@ provider "aws" {
 }
 
 module "iam_roles" {
-  source     = "../account-map/modules/iam-roles"
-  privileged = true
-  context    = module.this.context
+  global_tenant_name = var.root_account_tenant_name
+  source             = "../account-map/modules/iam-roles"
+  privileged         = true
+  context            = module.this.context
 }
 
 variable "import_role_arn" {

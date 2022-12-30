@@ -52,3 +52,9 @@ variable "account_map_stage_name" {
   description = "The name of the stage where `account_map` is provisioned"
   default     = "root"
 }
+
+variable "root_account_tenant_name" {
+  type        = string
+  description = "The tenant name used for organization-wide resources"
+  default     = "mgmt"
+}

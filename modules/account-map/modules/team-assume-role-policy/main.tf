@@ -34,6 +34,7 @@ data "aws_arn" "denied" {
 module "allowed_role_map" {
   source = "../../../account-map/modules/roles-to-principals"
 
+  global_tenant_name = var.global_tenant_name
   privileged         = var.privileged
   role_map           = var.allowed_roles
   permission_set_map = var.allowed_permission_sets
@@ -45,6 +46,7 @@ module "allowed_role_map" {
 module "denied_role_map" {
   source = "../../../account-map/modules/roles-to-principals"
 
+  global_tenant_name = var.global_tenant_name
   privileged         = var.privileged
   role_map           = var.denied_roles
   permission_set_map = var.denied_permission_sets

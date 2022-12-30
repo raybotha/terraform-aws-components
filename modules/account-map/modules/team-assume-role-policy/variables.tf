@@ -52,3 +52,9 @@ variable "iam_users_enabled" {
   description = "True if you would like IAM Users to be able to assume the role."
   default     = false
 }
+
+variable "global_tenant_name" {
+  type        = string
+  description = "The tenant name used for organization-wide resources"
+  default     = "mgmt"
+}

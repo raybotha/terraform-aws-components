@@ -38,7 +38,8 @@ module "sso_account_assignments_root" {
 locals {
   enabled = module.this.enabled
 
-  account_map = module.account_map.outputs.full_account_map
+  account_map  = module.account_map.outputs.full_account_map
+  root_account = local.account_map["${var.root_account_tenant_name}-root"]
   account_assignments_groups = flatten([
     for account_key, account in var.account_assignments : [
       for principal_key, principal in account.groups : [
@@ -57,12 +58,12 @@ locals {
   account_assignments_groups_no_root = [
     for val in local.account_assignments_groups :
     val
-    if val.account != local.account_map["root"]
+    if val.account != local.root_account
   ]
   account_assignments_groups_only_root = [
     for val in local.account_assignments_groups :
     val
-    if val.account == local.account_map["root"]
+    if val.account == local.root_account
   ]
   account_assignments_users = flatten([
     for account_key, account in var.account_assignments : [
@@ -81,12 +82,12 @@ locals {
   account_assignments_users_no_root = [
     for val in local.account_assignments_users :
     val
-    if val.account != local.account_map["root"]
+    if val.account != local.root_account
   ]
   account_assignments_users_only_root = [
     for val in local.account_assignments_users :
     val
-    if val.account == local.account_map["root"]
+    if val.account == local.root_account
   ]
 
   account_assignments      = concat(local.account_assignments_groups_no_root, local.account_assignments_users_no_root)

@@ -59,3 +59,9 @@ variable "identity_roles_accessible" {
     EOT
   default     = []
 }
+
+variable "root_account_tenant_name" {
+  type        = string
+  description = "The tenant name used for organization-wide resources"
+  default     = "mgmt"
+}
